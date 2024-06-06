@@ -1,5 +1,42 @@
 This is local, but can sync it to the strapi cloud through github.
 
+Have to go to http://localhost:1337/admin > Settings > Users & Permissions Plugin > Roles and check all the boxes in Catergory and Restaurants so that Postman can get a response. Now can GET http://localhost:1337/api/restaurants.
+
+When POSTing a new restaurant, with this body
+  {"Name": "Isabelle et Vicent", "Description": "French bistro"}
+
+it errors with 
+  Missing \"data\" payload in the request body
+
+Had to wrap the payload in a data field like so
+  {
+    "data": {
+        "Name": "Isabelle et Vicent",
+        "Description": "French bistro"
+    }
+  }
+  
+But then Description came back null, so try this
+  {
+    "data": {
+        "Name": "Costa Brava",
+        "Description": [
+                    {
+                        "type": "paragraph",
+                        "children": [
+                            {
+                                "type": "text",
+                                "text": "Spanish fancy restaurant"
+                            }
+                        ]
+                    }
+                ]
+    }
+  }
+
+Can get a python code snippet of these requests from postman.
+
+
 
 # 🚀 Getting started with Strapi
 
